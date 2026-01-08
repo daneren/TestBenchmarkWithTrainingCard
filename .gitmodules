@@ -1,0 +1,6 @@
+[submodule "Pai-Megatron-Patch"]
+	path = Pai-Megatron-Patch
+	url = https://github.com/alibaba/Pai-Megatron-Patch.git
+[submodule "verl"]
+	path = verl
+	url = https://github.com/volcengine/verl.git
