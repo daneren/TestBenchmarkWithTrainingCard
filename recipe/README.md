@@ -240,7 +240,7 @@ nnodes=2 bash recipe/qwen3_vl_8b_megatron.sh 2>&1 | tee /workspace/recipe/qwen3_
 ### 评测环境准备
 
 ```shell
-docker run -tid --gpus all --privileged --device=/dev/infiniband/ --cap-add=IPC_LOCK --shm-size=500g  --network=host --name=danerli_qwen3vl -v /mnt/:/mnt/ -v/mnt/cfs/danerli/workspace/test_benchmark/TestBenchmarkWithTrainingCard:/workspace -w /workspace ccr.ccs.tencentyun.com/ti-platform/pytorch:qwen3vl-cu128 bash
+docker run -tid --gpus all --privileged --device=/dev/infiniband/ --cap-add=IPC_LOCK --shm-size=500g  --network=host --name=danerli_qwen3vl -v /mnt/:/mnt/ -v/mnt/cfs/danerli/workspace/test_benchmark/TestBenchmarkWithTrainingCard:/workspace -w /workspace qwenllm/qwenvl:qwen3vl-cu128 bash
 
 docker start danerli_qwen3vl && docker exec -it danerli_qwen3vl bash
 ```
