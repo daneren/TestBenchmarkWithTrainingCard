@@ -17,13 +17,21 @@
 
 ## 📊 模型训练指标
 
-RL 训练结果与原始模型比较（MMMU-Pro 数据集）
+### 📊 Qwen3-VL-8B RL训练 vs 原始模型准确率对比（MMMU-Pro 数据集）
 
-| 模型名称 | 数据集 | 指标类型 | 类别 | 样本数 | 准确率 |
-|---------|--------|---------|------|--------|--------|
-| qwen3_vl_8b_orig | mmmu_pro | mean_acc | OVERALL | 1730 | 0.5902 |
-| qwen3_vl_8b_megatron_mutil_node_120 | mmmu_pro | mean_acc | OVERALL | 1730 | 0.6231 |
-| qwen3_vl_8b_megatron_mutil_node_120 | mmmu_pro | mean_acc | OVERALL | 1730 | 0.6249 |
+| 模型名称                           | 训练方式      | RL Step | MMMU-Pro 准确率 | 日志文件                                                         |
+|------------------------------------|-------------|---------|-----------------|-------------------------------------------------------------------|
+| qwen3_vl_8b_orig                   | 原始预训练    | -       | 0.5902          | -                                                                 |
+| qwen3_vl_8b_megatron_single_node_60| 单机RL       | 60      | 0.6249          | [qwen3_vl_8b_megatron_single_node.log](./qwen3_vl_8b_megatron_single_node.log) |
+| qwen3_vl_8b_megatron_mutil_node_120| 多机RL       | 120     | 0.6231          | [qwen3_vl_8b_megatron_mutil_node.log](./qwen3_vl_8b_megatron_mutil_node.log)   |
+
+**训练效果说明：**
+- RL 强化学习训练后，模型在 MMMU-Pro 数据集上的准确率均有明显提升。
+    - 单机 RL 训练（step 60）准确率由 0.5902 提升至 0.6249
+    - 多机 RL 训练（step 120）准确率由 0.5902 提升至 0.6231
+
+
+
 
 ## 🔧 前置要求
 
