@@ -18,7 +18,7 @@ export CUDA_DEVICE_MAX_CONNECTIONS=1 # For megatron communication/computation ov
 export VLLM_ALLREDUCE_USE_SYMM_MEM=0 # for vllm0.11.0 with TP
 export WANDB_MODE=offline
 
-export HF_MODEL_PATH=${HF_MODEL_PATH:-"/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-8B-Instruct"}
+export HF_MODEL_PATH=${HF_MODEL_PATH:-"/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-8B-Instruct-to-mcore"}
 
 GEN_TP=${GEN_TP:-1}
 CP=${CP:-2}
@@ -26,7 +26,18 @@ TP=${TP:-2}
 PP=${PP:-2}
 
 # nnodes
-export nnodes=${nnodes:-2}
+export nnodes=${nnodes:-1}
+
+# 根据节点数设置实验名称
+if [ "$nnodes" -eq 1 ]; then
+    export experiment_name="qwen3_vl_8b_megatron_single_node"
+    echo "Running in single node mode"
+else
+    export experiment_name="qwen3_vl_8b_megatron_mutil_node"
+    echo "Running in multi-node mode with $nnodes nodes"
+fi
+
+echo "Experiment name: $experiment_name"
 
 export exp_path=$workspace/recipe/exp
 export CKPTS_DIR=$exp_path/checkpoint/qwen3_vl_8b_megatron_$nnodes_node
@@ -92,7 +103,7 @@ python3 -m verl.trainer.main_ppo --config-path=config \
     trainer.critic_warmup=0 \
     trainer.logger='["console","wandb"]' \
     trainer.project_name='verl_rl_demo' \
-    trainer.experiment_name='qwen3_vl_8b_megatron_mutil_node' \
+    trainer.experiment_name=$experiment_name \
     trainer.default_local_dir="${CKPTS_DIR}" \
     trainer.n_gpus_per_node=8 \
     trainer.nnodes=$nnodes \
@@ -100,5 +111,3 @@ python3 -m verl.trainer.main_ppo --config-path=config \
     trainer.test_freq=5 \
     trainer.total_epochs=30 $@ 
 
-
-# cd /mnt/cfs/danerli/workspace/qwen/train && wandb sync --sync-all --entity lr-experiment --project qwen3-vl-rl

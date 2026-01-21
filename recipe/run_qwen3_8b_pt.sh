@@ -14,7 +14,7 @@ export NCCL_CUMEM_HOST_ENABLE=0
 export NCCL_NET_SHARED_BUFFERS=0
 export NCCL_NET_GDR_LEVEL=2
 
-export HF_MODEL_PATH=${HF_MODEL_PATH:-"/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-8B"}
+export HF_MODEL_PATH=${HF_MODEL_PATH:-"/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-8B-to-mcore"}
 
 export workspace=${workspace:-"/workspace"}
 cd $workspace/Pai-Megatron-Patch/examples/qwen3

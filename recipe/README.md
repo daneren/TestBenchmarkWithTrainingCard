@@ -10,6 +10,7 @@
 - [前置要求](#前置要求)
 - [环境准备](#环境准备)
 - [数据准备](#数据准备)
+- [模型准备](#模型准备)
 - [模型训练](#模型训练)
   - [RL 训练 (Qwen3-VL-8B)](#rl-训练-qwen3-vl-8b)
   - [Qwen3-8B 训练](#qwen3-8b-训练)
@@ -185,6 +186,31 @@ python build_fake_wds_for_vl.py --output-dir /workspace/datatsets/wds
 - 数据下载完成后会保存在 `/workspace/datatsets/` 目录下
 - 强化学习的数据已经通过git clone下载到了[/workspace/datatsets/geo3k](../datatsets/geo3k/)
 
+## 模型准备
+
+将hf格式的模型转换为mcore格式的模型
+
+```shell
+
+cd /workspace/Pai-Megatron-Patch/toolkits/distributed_checkpoints_convertor
+bash scripts/qwen3/run_8xH20.sh \
+8B \
+/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-8B \
+/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-8B-to-mcore  \
+false \
+true \
+bf16
+
+cd /workspace/Pai-Megatron-Patch/toolkits/distributed_checkpoints_convertor
+bash scripts/qwen3_vl/run_8xH20.sh \
+A3B \
+/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct  \
+/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct-to-mcore  \
+false \
+true \
+bf16
+
+```
 
 ## 🎯 模型训练
 
@@ -231,7 +257,11 @@ nnodes=2 bash recipe/qwen3_vl_8b_megatron.sh 2>&1 | tee /workspace/recipe/qwen3_
 #### 训练日志
 
 - **单机运行日志：** [qwen3_vl_8b_megatron_single_node.log](./qwen3_vl_8b_megatron_single_node.log)
+- **单机运行wandb日志：** [qwen3_vl_8b_megatron_single_node](https://wandb.ai/lr-experiment/TestBenchmarkWithTrainingCard/runs/cdwvjsde)
+
 - **多机运行日志：** [qwen3_vl_8b_megatron_mutil_node.log](./qwen3_vl_8b_megatron_mutil_node.log)
+- **多机运行wandb日志：** [qwen3_vl_8b_megatron_mutil_node](https://wandb.ai/lr-experiment/TestBenchmarkWithTrainingCard/runs/8j9jdbbw)
+
 
 **训练输出：**
 训练完成后，模型 checkpoint 会保存在 `/workspace/recipe/exp/checkpoint/qwen3_vl_8b_megatron_*/` 目录下。
@@ -309,10 +339,10 @@ docker exec -it danerli_benchmark bash
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 export WORLD_SIZE=1
 export RANK=0
-export MASTER_ADDR=<LOCAL_NODE_IP>      # 主节点 IP（单机训练可设置为 127.0.0.1 或本机 IP）
+export MASTER_ADDR=127.0.0.1    
 export MASTER_PORT=23567                # 通信端口
 export KUBERNETES_CONTAINER_RESOURCE_GPU=8
-export HF_MODEL_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-8B
+export HF_MODEL_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-8B-to-mcore
 
 bash /workspace/recipe/run_qwen3_8b_pt.sh 2>&1 | tee /workspace/recipe/run_qwen3_8b_pt_single_node.log
 ```
@@ -327,7 +357,7 @@ export RANK=0                           # 当前节点 rank
 export MASTER_ADDR=<MASTER_NODE_IP>     # 主节点 IP（例如：192.168.1.100）
 export MASTER_PORT=23567                # 通信端口
 export KUBERNETES_CONTAINER_RESOURCE_GPU=8
-export HF_MODEL_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-8B
+export HF_MODEL_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-8B-to-mcore
 
 bash /workspace/recipe/run_qwen3_8b_pt.sh 2>&1 | tee /workspace/recipe/run_qwen3_8b_pt_mutil_node_rank_0.log
 ```
@@ -340,7 +370,7 @@ export RANK=1                           # 当前节点 rank
 export MASTER_ADDR=<MASTER_NODE_IP>     # 主节点 IP（与 Rank 0 相同）
 export MASTER_PORT=23567                # 通信端口（与 Rank 0 相同）
 export KUBERNETES_CONTAINER_RESOURCE_GPU=8
-export HF_MODEL_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-8B
+export HF_MODEL_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-8B-to-mcore
 
 bash /workspace/recipe/run_qwen3_8b_pt.sh 2>&1 | tee /workspace/recipe/run_qwen3_8b_pt_mutil_node_rank_1.log
 ```
@@ -369,10 +399,10 @@ docker exec -it danerli_benchmark bash
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 export WORLD_SIZE=1
 export NODE_RANK=0
-export MASTER_ADDR=<LOCAL_NODE_IP>      # 主节点 IP（单机训练可设置为 127.0.0.1 或本机 IP）
+export MASTER_ADDR=127.0.0.1
 export MASTER_PORT=23567
 export GPUS_PER_NODE=8
-export PRETRAIN_CHECKPOINT_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct
+export PRETRAIN_CHECKPOINT_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct-to-mcore
 
 bash /workspace/recipe/run_qwen3vl_30B_A3B_pt.sh 2>&1 | tee /workspace/recipe/Qwen3-VL-30B-A3B-Instruct_single_node.log
 ```
@@ -381,13 +411,27 @@ bash /workspace/recipe/run_qwen3vl_30B_A3B_pt.sh 2>&1 | tee /workspace/recipe/Qw
 
 **Rank 0 节点：**
 ```bash
-export PRETRAIN_CHECKPOINT_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+export NNODES=2
+export NODE_RANK=0
+export MASTER_ADDR=${MASTER_ADDR:-"请设置 MASTER_ADDR 环境变量"}  # 主节点 IP（必需）
+export MASTER_PORT=${MASTER_PORT:-23567}                        # 通信端口
+export GPUS_PER_NODE=8 
+
+export PRETRAIN_CHECKPOINT_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct-to-mcore
 bash /workspace/recipe/run_qwen3vl_30B_A3B_pt_mutil_node_rank_0.sh 2>&1 | tee /workspace/recipe/Qwen3-VL-30B-A3B-Instruct_mutil_node_rank_0.log
 ```
 
 **Rank 1 节点：**
 ```bash
-export PRETRAIN_CHECKPOINT_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+export NNODES=2
+export NODE_RANK=1
+export MASTER_ADDR=${MASTER_ADDR:-"请设置 MASTER_ADDR 环境变量"}  # 主节点 IP（必需） 
+export MASTER_PORT=${MASTER_PORT:-23567}                        # 通信端口 
+export GPUS_PER_NODE=8 
+
+export PRETRAIN_CHECKPOINT_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct-to-mcore
 bash /workspace/recipe/run_qwen3vl_30B_A3B_pt_mutil_node_rank_1.sh 2>&1 | tee /workspace/recipe/Qwen3-VL-30B-A3B-Instruct_mutil_node_rank_1.log
 ```
 
