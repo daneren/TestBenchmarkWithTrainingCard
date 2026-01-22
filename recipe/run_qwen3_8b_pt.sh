@@ -33,7 +33,7 @@ bf16  \
 2  \
 1 \
 1 \
-4 \
+1 \
 true \
 true   \
 true \
@@ -46,4 +46,4 @@ ${workspace}/datatsets/qwen-datasets/mmap_qwen3_datasets_text_document   \
 $HF_MODEL_PATH  \
 100000000  \
 1000000   \
-${workspace}/test_logs/output_mcore_qwen3_8b_pt_mutil_node
+${workspace}/test_logs/output_mcore_qwen3_8b_pt

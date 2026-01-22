@@ -1,14 +1,13 @@
 #!/bin/bash
-set -xe
+set -e
+unset NCCL_DEBUG
+
 
 export workspace=${workspace:-"/workspace"}
 cd $workspace/Pai-Megatron-Patch/examples/qwen3_vl
+CURRENT_DIR=$workspace/Pai-Megatron-Patch/examples/qwen3_vl
 
-# CURRENT_DIR="$( cd "$( dirname "$0" )" && pwd )"
-# MEGATRON_PATCH_PATH=$( dirname $( dirname ${CURRENT_DIR}))
-
-
-MEGATRON_PATCH_PATH=$workspace/Pai-Megatron-Patch
+MEGATRON_PATCH_PATH=$( dirname $( dirname ${CURRENT_DIR}))
 export PYTHONPATH=${MEGATRON_PATCH_PATH}:${MEGATRON_PATCH_PATH}/backends/megatron/Megatron-LM-250624:$PYTHONPATH
 export CUDA_DEVICE_MAX_CONNECTIONS=1
 export NVTE_APPLY_QK_LAYER_SCALING=0
@@ -25,12 +24,8 @@ export your_wds_output_dir=${your_wds_output_dir:-"/workspace/datatsets/wds"}
 
 
 
-
-# MASTER_ADDR=localhost
-# MASTER_PORT=$(shuf -n 1 -i 10000-65535)
-# NNODES=1
-# NODE_RANK=0
-# GPUS_PER_NODE=8
+[ -z "$MASTER_ADDR" ] && export MASTER_ADDR=localhost
+[ -z "$MASTER_PORT" ] && export MASTER_PORT=${MASTER_PORT:-$(shuf -n 1 -i 10000-65535)}
 DISTRIBUTED_ARGS=(
     --nnodes $NNODES
     --node_rank $NODE_RANK
@@ -39,26 +34,26 @@ DISTRIBUTED_ARGS=(
     --master_port $MASTER_PORT
 )
 
-TP=1
-PP=1
+export TP=${TP:-1}
+export PP=${PP:-8}
 EP=1
 ETP=1
 CP=1
 MBS=1
-GBS=32
-SEQ_LEN=4096
+export GBS=${GBS:-1}
+export SEQ_LEN=${SEQ_LEN:-4096}
 TRAIN_DATA_PATH=${your_wds_output_dir}
 VALID_DATA_PATH=${your_wds_output_dir}
-export PRETRAIN_CHECKPOINT_PATH=${PRETRAIN_CHECKPOINT_PATH:-"/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct-mcore"} 
+export PRETRAIN_CHECKPOINT_PATH=${PRETRAIN_CHECKPOINT_PATH:-"/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct-to-mcore"} 
 TRAIN_ITERS=500
 LR_WARMUP_ITERS=50
 LR_DECAY_ITERS=450
 
-MODEL_ARGS_SMALL=(
+MODEL_ARGS=(
     --transformer-impl transformer_engine
     --attention-dropout 0.0
     --hidden-dropout 0.0
-    --num-layers 4
+    --num-layers 48
     --hidden-size 2048
     --ffn-hidden-size 6144
     --moe-ffn-hidden-size 768
@@ -82,7 +77,7 @@ MODEL_ARGS_SMALL=(
     --moe-aux-loss-coeff 0.001
     --moe-router-score-function sigmoid
     --moe-router-topk 8
-    --moe-layer-freq "'([1]*4)'"
+    --moe-layer-freq "'([1]*48)'"
     --num-experts 128
     --mrope-section 24 20 20
     --patch-size 16
@@ -93,23 +88,41 @@ MODEL_ARGS_SMALL=(
     --rotary-base 1000000
     --rotary-seq-len-interpolation-factor 1
     --rotary-percent 1.0
-    --padded-vocab-size 151936
+    --padded-vocab-size 152064
     --patch-tokenizer-type Qwen2VLTokenizer
 )
 
+
+##### Prepare logdirs #######
+OUTPUT_BASEPATH=$workspace/test_logs/run_qwen3vl_30B_A3B/
+NAME="run_qwen3vl_30B_A3B-tp-${TP}-pp-${PP}-ep-${EP}-etp-${ETP}-cp-${CP}-mbs-${MBS}-gbs-${GBS}-seqlen-${SEQ_LEN}-ti-${TRAIN_ITERS}-wi-${LR_WARMUP_ITERS}"
+mkdir -vp "${OUTPUT_BASEPATH}/tensorboard/"
+mkdir -vp "${OUTPUT_BASEPATH}/checkpoint/"
+mkdir -vp "${OUTPUT_BASEPATH}/log/"
+current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+TENSORBOARD_DIR="${OUTPUT_BASEPATH}/tensorboard/${NAME}_${current_time}"
+mkdir -vp ${TENSORBOARD_DIR}
+SAVED_PRETRAIN_CHECKPOINT_PATH="${OUTPUT_BASEPATH}/checkpoint/${NAME}"
+
+mkdir -vp ${SAVED_PRETRAIN_CHECKPOINT_PATH}
+find -L ${PRETRAIN_CHECKPOINT_PATH} -maxdepth 1 -type f -name "*.json" -print0 | xargs -0 cp -t ${SAVED_PRETRAIN_CHECKPOINT_PATH}
+find -L ${PRETRAIN_CHECKPOINT_PATH} -maxdepth 1 -type f -name "merges.txt" -print0 | xargs -0 cp -t ${SAVED_PRETRAIN_CHECKPOINT_PATH}
+
 TRAINING_ARGS=(
+    --save ${SAVED_PRETRAIN_CHECKPOINT_PATH} 
+    --use-mcore-models
     --load ${PRETRAIN_CHECKPOINT_PATH}
-    --micro-batch-size ${MBS} 
+    --micro-batch-size ${MBS}
     --global-batch-size ${GBS}
     --train-iters ${TRAIN_ITERS}
-    --weight-decay 0.1 
-    --adam-beta1 0.9 
-    --adam-beta2 0.95 
-    --init-method-std 0.006 
-    --clip-grad 1.0 
+    --weight-decay 0.1
+    --adam-beta1 0.9
+    --adam-beta2 0.95
+    --init-method-std 0.006
+    --clip-grad 1.0
     --bf16
-    --lr 6.0e-5 
-    --lr-decay-style cosine 
+    --lr 6.0e-5
+    --lr-decay-style cosine
     --min-lr 6.0e-6
     --lr-decay-iters ${LR_DECAY_ITERS}
     --lr-warmup-iters ${LR_WARMUP_ITERS}
@@ -122,11 +135,16 @@ TRAINING_ARGS=(
     --distributed-timeout-minutes 60
     --exit-duration-in-mins 220
     --no-save-optim
+    --no-check-for-nan-in-loss-and-grad
+    --manual-gc
+    --manual-gc-interval 10
     --no-load-optim
     --no-load-rng
+    --auto-detect-ckpt-format
     --save-interval 5000000
     --eval-iters 32
     --eval-interval 20000000
+    --dist-ckpt-strictness log_all
     --log-timers-to-tensorboard
     --log-memory-to-tensorboard
     --log-validation-ppl-to-tensorboard
@@ -134,26 +152,51 @@ TRAINING_ARGS=(
     --log-interval 1
 )
 
-INFRA_ARGS=(
-    --tensor-model-parallel-size ${TP}
-    --pipeline-model-parallel-size ${PP}
-    --expert-model-parallel-size ${EP}
-    --context-parallel-size ${CP}
-    --expert-tensor-parallel-size ${ETP}
-    --use-distributed-optimizer
-    --sequence-parallel
-    --attention-backend flash
-    --recompute-granularity selective
-    --overlap-grad-reduce
-    --overlap-param-gather
-)
+
+# 根据节点数设置实验参数
+if [ "$NNODES" -eq 1 ]; then
+    export NVTE_FLASH_ATTN=0 NVTE_FUSED_ATTN=1
+    INFRA_ARGS=(
+        --enable-experimental
+        --tensor-model-parallel-size ${TP}
+        --pipeline-model-parallel-size ${PP}
+        --expert-model-parallel-size ${EP}
+        --context-parallel-size ${CP}
+        --expert-tensor-parallel-size ${ETP}
+        --use-distributed-optimizer
+        --sequence-parallel
+        --attention-backend fused
+        --recompute-granularity selective
+        --overlap-grad-reduce
+        --overlap-param-gather
+        --optimizer-cpu-offload 
+        --use-precision-aware-optimizer 
+        --optimizer-offload-fraction 0.1
+    )
+else
+    INFRA_ARGS=(
+        --enable-experimental
+        --tensor-model-parallel-size ${TP}
+        --pipeline-model-parallel-size ${PP}
+        --expert-model-parallel-size ${EP}
+        --context-parallel-size ${CP}
+        --expert-tensor-parallel-size ${ETP}
+        --use-distributed-optimizer
+        --sequence-parallel
+        --attention-backend flash
+        --recompute-granularity selective
+        --overlap-grad-reduce
+        --overlap-param-gather
+    )
+fi
+
 
 cmd="torchrun ${DISTRIBUTED_ARGS[@]} pretrain_qwen.py \
-    ${MODEL_ARGS_SMALL[@]} \
+    ${MODEL_ARGS[@]} \
     ${TRAINING_ARGS[@]} \
     ${INFRA_ARGS[@]}"
 
 echo $cmd
 eval $cmd
-# eval $cmd 2>&1 | tee test.log ; exit ${PIPESTATUS[0]}
+# eval $cmd 2>&1 | tee run_qwen3_vl.log ; exit ${PIPESTATUS[0]}
 set +x

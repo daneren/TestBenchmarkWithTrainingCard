@@ -217,6 +217,10 @@ wandb
 !recipe/*log
 
 datatsets/studio_mmlu
+datatsets/qwen-datasets
+datatsets/wds
 recipe/checkpoints/
 recipe/exp/
 recipe/model_evaluation_result/
+
+test.sh
