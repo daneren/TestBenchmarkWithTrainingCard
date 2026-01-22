@@ -4,7 +4,7 @@
 | RL训练评估             | 显卡型号 | gpus | step | s/it   |
 | ---------------------- | -------- | ---- | ---- | -- | 
 | Qwen3-VL-8B-Instruct   | H20      | 8     | 30   | 679.15 |
-| Qwen3-VL-8B-Instruct   | H20      | 16   | 330   | 91.98 |
+| Qwen3-VL-8B-Instruct   | H20      | 16    | 30   | 391.98 |
 
 ## RL训练评估（准确率）
 | RL训练评估                 | 显卡型号 | 训练方式     | RL Step | MMMU-Pro准确率 |
