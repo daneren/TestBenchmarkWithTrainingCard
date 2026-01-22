@@ -414,10 +414,12 @@ bash /workspace/recipe/run_qwen3vl_30B_A3B_pt.sh 2>&1 | tee /workspace/recipe/Qw
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 export NNODES=2
 export NODE_RANK=0
-export MASTER_ADDR=${MASTER_ADDR:-"请设置 MASTER_ADDR 环境变量"}  # 主节点 IP（必需）
-export MASTER_PORT=${MASTER_PORT:-23567}                        # 通信端口
+export MASTER_ADDR=${MASTER_ADDR:-"请设置 MASTER_ADDR 环境变量"}  # 主节点 IP（必需） 
+export MASTER_PORT=${MASTER_PORT:-23567}                        # 通信端口                      
 export GPUS_PER_NODE=8 
-
+export TP=2
+export PP=8
+export GBS=2
 export PRETRAIN_CHECKPOINT_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct-to-mcore
 bash /workspace/recipe/run_qwen3vl_30B_A3B_pt_mutil_node_rank_0.sh 2>&1 | tee /workspace/recipe/Qwen3-VL-30B-A3B-Instruct_mutil_node_rank_0.log
 ```
@@ -428,9 +430,11 @@ export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 export NNODES=2
 export NODE_RANK=1
 export MASTER_ADDR=${MASTER_ADDR:-"请设置 MASTER_ADDR 环境变量"}  # 主节点 IP（必需） 
-export MASTER_PORT=${MASTER_PORT:-23567}                        # 通信端口 
+export MASTER_PORT=${MASTER_PORT:-23567}                        # 通信端口  
 export GPUS_PER_NODE=8 
-
+export TP=2
+export PP=8
+export GBS=2
 export PRETRAIN_CHECKPOINT_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct-to-mcore
 bash /workspace/recipe/run_qwen3vl_30B_A3B_pt_mutil_node_rank_1.sh 2>&1 | tee /workspace/recipe/Qwen3-VL-30B-A3B-Instruct_mutil_node_rank_1.log
 ```
