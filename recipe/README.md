@@ -184,7 +184,7 @@ python build_fake_wds_for_vl.py --output-dir /workspace/datatsets/wds
 - LLM 数据：用于语言模型预训练
 - MLM 数据：用于视觉-语言多模态模型训练
 - 数据下载完成后会保存在 `/workspace/datatsets/` 目录下
-- 强化学习的数据已经通过git clone下载到了[/workspace/datatsets/geo3k](../datatsets/geo3k/)
+- 强化学习的数据已经通过git clone下载到了[../datatsets/geo3k](../datatsets/geo3k/)
 
 ## 模型准备
 
