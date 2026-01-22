@@ -1,0 +1,118 @@
+analysis_report: true
+api_url: http://0.0.0.0:8000/v1/chat/completions
+chat_template: null
+dataset_args:
+  mmlu_pro:
+    subset_list:
+    - math
+  mmmu_pro:
+    aggregation: mean
+    dataset_id: AI-ModelScope/MMMU_Pro
+    default_subset: standard (4 options)
+    description: MMMU-Pro is an enhanced multimodal benchmark designed to rigorously
+      assess the true understanding capabilities of advanced AI models across multiple
+      modalities. It builds upon the original MMMU benchmark by introducing several
+      key improvements that make it more challenging and realistic, ensuring that
+      models are evaluated on their genuine ability to integrate and comprehend both
+      visual and textual information.
+    eval_split: test
+    extra_params:
+      dataset_format: '# choose from [''standard (4 options)'', ''standard (10 options)'',
+        ''vision''], default ''standard (4 options)'''
+    few_shot_num: 0
+    few_shot_prompt_template: null
+    few_shot_random: false
+    filters: null
+    metric_list:
+    - acc
+    name: mmmu_pro
+    output_types:
+    - generation
+    pretty_name: MMMU-PRO
+    prompt_template: 'Answer the following multiple choice question. The last line
+      of your response should be of the following format: ''ANSWER: $LETTER'' (without
+      quotes) where LETTER is one of {letters}. Think step by step before answering.
+
+
+      {question}
+
+
+      {choices}'
+    query_template: null
+    review_timeout: null
+    shuffle: false
+    shuffle_choices: false
+    subset_list:
+    - Accounting
+    - Agriculture
+    - Architecture_and_Engineering
+    - Art
+    - Art_Theory
+    - Basic_Medical_Science
+    - Biology
+    - Chemistry
+    - Clinical_Medicine
+    - Computer_Science
+    - Design
+    - Diagnostics_and_Laboratory_Medicine
+    - Economics
+    - Electronics
+    - Energy_and_Power
+    - Finance
+    - Geography
+    - History
+    - Literature
+    - Manage
+    - Marketing
+    - Materials
+    - Math
+    - Mechanical_Engineering
+    - Music
+    - Pharmacy
+    - Physics
+    - Psychology
+    - Public_Health
+    - Sociology
+    system_prompt: null
+    tags:
+    - MultiModal
+    - Knowledge
+    - MCQ
+    train_split: null
+dataset_dir: /root/.cache/modelscope/hub/datasets
+dataset_hub: modelscope
+datasets:
+- mmmu_pro
+debug: false
+eval_backend: Native
+eval_batch_size: 5
+eval_config: null
+eval_type: openai_api
+evalscope_version: 1.2.0
+generation_config:
+  batch_size: 5
+  max_tokens: 9000
+  n: 1
+  temperature: 0.6
+  top_k: 20
+  top_p: 0.95
+ignore_errors: false
+judge_model_args: {}
+judge_strategy: auto
+judge_worker_num: 1
+limit: null
+model: qwen3_vl_8b_megatron_mutil_node_120
+model_args: {}
+model_id: qwen3_vl_8b_megatron_mutil_node_120
+model_task: text_generation
+repeats: 1
+rerun_review: true
+sandbox_config: {}
+sandbox_manager_config: {}
+sandbox_type: docker
+seed: 42
+stream: null
+timeout: null
+use_cache: null
+use_sandbox: false
+work_dir: /workspace/recipe/model_evaluation_result/20260108_034746

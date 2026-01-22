@@ -1,0 +1,510 @@
+2026-01-08 03:47:52 - evalscope - INFO: Running with native backend
+2026-01-08 03:47:52 - evalscope - INFO: Creating model qwen3_vl_8b_orig with eval_type=openai_api base_url=http://0.0.0.0:8000/v1/chat/completions, config={'batch_size': 5, 'max_tokens': 9000, 'top_p': 0.95, 'temperature': 0.6, 'top_k': 20, 'n': 1}, model_args={}
+2026-01-08 03:47:52 - evalscope - WARNING: Invalid dataset_format '# choose from ['standard (4 options)', 'standard (10 options)', 'vision'], default 'standard (4 options)'', fallback to 'standard (4 options)'
+2026-01-08 03:47:52 - evalscope - INFO: Dump task config to /workspace/recipe/model_evaluation_result/20260108_034751/configs/task_config_78ea83.yaml
+2026-01-08 03:47:52 - evalscope - INFO: {
+    "model": "qwen3_vl_8b_orig",
+    "model_id": "qwen3_vl_8b_orig",
+    "model_args": {},
+    "model_task": "text_generation",
+    "chat_template": null,
+    "datasets": [
+        "mmmu_pro"
+    ],
+    "dataset_args": {
+        "mmlu_pro": {
+            "subset_list": [
+                "math"
+            ]
+        },
+        "mmmu_pro": {
+            "name": "mmmu_pro",
+            "dataset_id": "AI-ModelScope/MMMU_Pro",
+            "output_types": [
+                "generation"
+            ],
+            "subset_list": [
+                "Accounting",
+                "Agriculture",
+                "Architecture_and_Engineering",
+                "Art",
+                "Art_Theory",
+                "Basic_Medical_Science",
+                "Biology",
+                "Chemistry",
+                "Clinical_Medicine",
+                "Computer_Science",
+                "Design",
+                "Diagnostics_and_Laboratory_Medicine",
+                "Economics",
+                "Electronics",
+                "Energy_and_Power",
+                "Finance",
+                "Geography",
+                "History",
+                "Literature",
+                "Manage",
+                "Marketing",
+                "Materials",
+                "Math",
+                "Mechanical_Engineering",
+                "Music",
+                "Pharmacy",
+                "Physics",
+                "Psychology",
+                "Public_Health",
+                "Sociology"
+            ],
+            "default_subset": "standard (4 options)",
+            "few_shot_num": 0,
+            "few_shot_random": false,
+            "train_split": null,
+            "eval_split": "test",
+            "prompt_template": "Answer the following multiple choice question. The last line of your response should be of the following format: 'ANSWER: $LETTER' (without quotes) where LETTER is one of {letters}. Think step by step before answering.\n\n{question}\n\n{choices}",
+            "few_shot_prompt_template": null,
+            "system_prompt": null,
+            "query_template": null,
+            "pretty_name": "MMMU-PRO",
+            "description": "MMMU-Pro is an enhanced multimodal benchmark designed to rigorously assess the true understanding capabilities of advanced AI models across multiple modalities. It builds upon the original MMMU benchmark by introducing several key improvements that make it more challenging and realistic, ensuring that models are evaluated on their genuine ability to integrate and comprehend both visual and textual information.",
+            "tags": [
+                "MultiModal",
+                "Knowledge",
+                "MCQ"
+            ],
+            "filters": null,
+            "metric_list": [
+                "acc"
+            ],
+            "aggregation": "mean",
+            "shuffle": false,
+            "shuffle_choices": false,
+            "review_timeout": null,
+            "extra_params": {
+                "dataset_format": "# choose from ['standard (4 options)', 'standard (10 options)', 'vision'], default 'standard (4 options)'"
+            }
+        }
+    },
+    "dataset_dir": "/root/.cache/modelscope/hub/datasets",
+    "dataset_hub": "modelscope",
+    "repeats": 1,
+    "generation_config": {
+        "batch_size": 5,
+        "max_tokens": 9000,
+        "top_p": 0.95,
+        "temperature": 0.6,
+        "top_k": 20,
+        "n": 1
+    },
+    "eval_type": "openai_api",
+    "eval_backend": "Native",
+    "eval_config": null,
+    "limit": null,
+    "eval_batch_size": 5,
+    "use_cache": null,
+    "rerun_review": true,
+    "work_dir": "/workspace/recipe/model_evaluation_result/20260108_034751",
+    "ignore_errors": false,
+    "debug": false,
+    "seed": 42,
+    "api_url": "http://0.0.0.0:8000/v1/chat/completions",
+    "timeout": null,
+    "stream": null,
+    "judge_strategy": "auto",
+    "judge_worker_num": 1,
+    "judge_model_args": {},
+    "analysis_report": true,
+    "use_sandbox": false,
+    "sandbox_type": "docker",
+    "sandbox_manager_config": {},
+    "sandbox_config": {},
+    "evalscope_version": "1.2.0"
+}
+2026-01-08 03:47:52 - evalscope - INFO: Start evaluating benchmark: mmmu_pro
+2026-01-08 03:47:52 - evalscope - INFO: Loading dataset AI-ModelScope/MMMU_Pro from modelscope > subset: standard (4 options) > split: test ...
+2026-01-08 03:49:18 - evalscope - INFO: Evaluating all subsets of the dataset...
+2026-01-08 03:49:18 - evalscope - INFO: Evaluating subset: Accounting
+2026-01-08 03:49:18 - evalscope - INFO: Getting predictions for subset: Accounting
+2026-01-08 03:49:18 - evalscope - INFO: Processing 58 samples, if data is large, it may take a while.
+2026-01-08 03:51:57 - evalscope - INFO: Finished getting predictions for subset: Accounting.
+2026-01-08 03:51:57 - evalscope - INFO: Getting reviews for subset: Accounting
+2026-01-08 03:51:57 - evalscope - INFO: Reviewing 58 samples, if data is large, it may take a while.
+2026-01-08 03:51:57 - evalscope - INFO: Finished reviewing subset: Accounting. Total reviewed: 58
+2026-01-08 03:51:57 - evalscope - INFO: Aggregating scores for subset: Accounting
+2026-01-08 03:51:57 - evalscope - INFO: Evaluating subset: Agriculture
+2026-01-08 03:51:57 - evalscope - INFO: Getting predictions for subset: Agriculture
+2026-01-08 03:51:57 - evalscope - INFO: Processing 60 samples, if data is large, it may take a while.
+2026-01-08 03:52:45 - evalscope - INFO: Finished getting predictions for subset: Agriculture.
+2026-01-08 03:52:45 - evalscope - INFO: Getting reviews for subset: Agriculture
+2026-01-08 03:52:45 - evalscope - INFO: Reviewing 60 samples, if data is large, it may take a while.
+2026-01-08 03:52:50 - evalscope - INFO: Finished reviewing subset: Agriculture. Total reviewed: 60
+2026-01-08 03:52:50 - evalscope - INFO: Aggregating scores for subset: Agriculture
+2026-01-08 03:52:50 - evalscope - INFO: Evaluating subset: Architecture_and_Engineering
+2026-01-08 03:52:50 - evalscope - INFO: Getting predictions for subset: Architecture_and_Engineering
+2026-01-08 03:52:50 - evalscope - INFO: Processing 60 samples, if data is large, it may take a while.
+2026-01-08 03:59:39 - evalscope - INFO: Finished getting predictions for subset: Architecture_and_Engineering.
+2026-01-08 03:59:39 - evalscope - INFO: Getting reviews for subset: Architecture_and_Engineering
+2026-01-08 03:59:39 - evalscope - INFO: Reviewing 60 samples, if data is large, it may take a while.
+2026-01-08 03:59:39 - evalscope - INFO: Finished reviewing subset: Architecture_and_Engineering. Total reviewed: 60
+2026-01-08 03:59:39 - evalscope - INFO: Aggregating scores for subset: Architecture_and_Engineering
+2026-01-08 03:59:39 - evalscope - INFO: Evaluating subset: Art
+2026-01-08 03:59:39 - evalscope - INFO: Getting predictions for subset: Art
+2026-01-08 03:59:39 - evalscope - INFO: Processing 53 samples, if data is large, it may take a while.
+2026-01-08 04:00:29 - evalscope - INFO: Finished getting predictions for subset: Art.
+2026-01-08 04:00:29 - evalscope - INFO: Getting reviews for subset: Art
+2026-01-08 04:00:29 - evalscope - INFO: Reviewing 53 samples, if data is large, it may take a while.
+2026-01-08 04:00:32 - evalscope - INFO: Finished reviewing subset: Art. Total reviewed: 53
+2026-01-08 04:00:32 - evalscope - INFO: Aggregating scores for subset: Art
+2026-01-08 04:00:32 - evalscope - INFO: Evaluating subset: Art_Theory
+2026-01-08 04:00:32 - evalscope - INFO: Getting predictions for subset: Art_Theory
+2026-01-08 04:00:32 - evalscope - INFO: Processing 55 samples, if data is large, it may take a while.
+2026-01-08 04:01:23 - evalscope - INFO: Finished getting predictions for subset: Art_Theory.
+2026-01-08 04:01:23 - evalscope - INFO: Getting reviews for subset: Art_Theory
+2026-01-08 04:01:23 - evalscope - INFO: Reviewing 55 samples, if data is large, it may take a while.
+2026-01-08 04:01:24 - evalscope - INFO: Finished reviewing subset: Art_Theory. Total reviewed: 55
+2026-01-08 04:01:24 - evalscope - INFO: Aggregating scores for subset: Art_Theory
+2026-01-08 04:01:24 - evalscope - INFO: Evaluating subset: Basic_Medical_Science
+2026-01-08 04:01:24 - evalscope - INFO: Getting predictions for subset: Basic_Medical_Science
+2026-01-08 04:01:24 - evalscope - INFO: Processing 52 samples, if data is large, it may take a while.
+2026-01-08 04:02:32 - evalscope - INFO: Finished getting predictions for subset: Basic_Medical_Science.
+2026-01-08 04:02:32 - evalscope - INFO: Getting reviews for subset: Basic_Medical_Science
+2026-01-08 04:02:32 - evalscope - INFO: Reviewing 52 samples, if data is large, it may take a while.
+2026-01-08 04:02:33 - evalscope - INFO: Finished reviewing subset: Basic_Medical_Science. Total reviewed: 52
+2026-01-08 04:02:33 - evalscope - INFO: Aggregating scores for subset: Basic_Medical_Science
+2026-01-08 04:02:33 - evalscope - INFO: Evaluating subset: Biology
+2026-01-08 04:02:33 - evalscope - INFO: Getting predictions for subset: Biology
+2026-01-08 04:02:33 - evalscope - INFO: Processing 59 samples, if data is large, it may take a while.
+2026-01-08 04:03:46 - evalscope - INFO: Finished getting predictions for subset: Biology.
+2026-01-08 04:03:46 - evalscope - INFO: Getting reviews for subset: Biology
+2026-01-08 04:03:46 - evalscope - INFO: Reviewing 59 samples, if data is large, it may take a while.
+2026-01-08 04:03:47 - evalscope - INFO: Finished reviewing subset: Biology. Total reviewed: 59
+2026-01-08 04:03:47 - evalscope - INFO: Aggregating scores for subset: Biology
+2026-01-08 04:03:47 - evalscope - INFO: Evaluating subset: Chemistry
+2026-01-08 04:03:47 - evalscope - INFO: Getting predictions for subset: Chemistry
+2026-01-08 04:03:47 - evalscope - INFO: Processing 60 samples, if data is large, it may take a while.
+2026-01-08 04:06:10 - evalscope - INFO: Finished getting predictions for subset: Chemistry.
+2026-01-08 04:06:10 - evalscope - INFO: Getting reviews for subset: Chemistry
+2026-01-08 04:06:10 - evalscope - INFO: Reviewing 60 samples, if data is large, it may take a while.
+2026-01-08 04:06:32 - evalscope - INFO: Finished reviewing subset: Chemistry. Total reviewed: 60
+2026-01-08 04:06:32 - evalscope - INFO: Aggregating scores for subset: Chemistry
+2026-01-08 04:06:32 - evalscope - INFO: Evaluating subset: Clinical_Medicine
+2026-01-08 04:06:32 - evalscope - INFO: Getting predictions for subset: Clinical_Medicine
+2026-01-08 04:06:32 - evalscope - INFO: Processing 59 samples, if data is large, it may take a while.
+2026-01-08 04:07:52 - evalscope - INFO: Finished getting predictions for subset: Clinical_Medicine.
+2026-01-08 04:07:52 - evalscope - INFO: Getting reviews for subset: Clinical_Medicine
+2026-01-08 04:07:52 - evalscope - INFO: Reviewing 59 samples, if data is large, it may take a while.
+2026-01-08 04:08:12 - evalscope - INFO: Finished reviewing subset: Clinical_Medicine. Total reviewed: 59
+2026-01-08 04:08:12 - evalscope - INFO: Aggregating scores for subset: Clinical_Medicine
+2026-01-08 04:08:12 - evalscope - INFO: Evaluating subset: Computer_Science
+2026-01-08 04:08:12 - evalscope - INFO: Getting predictions for subset: Computer_Science
+2026-01-08 04:08:12 - evalscope - INFO: Processing 60 samples, if data is large, it may take a while.
+2026-01-08 04:10:32 - evalscope - INFO: Finished getting predictions for subset: Computer_Science.
+2026-01-08 04:10:32 - evalscope - INFO: Getting reviews for subset: Computer_Science
+2026-01-08 04:10:32 - evalscope - INFO: Reviewing 60 samples, if data is large, it may take a while.
+2026-01-08 04:10:50 - evalscope - INFO: Finished reviewing subset: Computer_Science. Total reviewed: 60
+2026-01-08 04:10:50 - evalscope - INFO: Aggregating scores for subset: Computer_Science
+2026-01-08 04:10:50 - evalscope - INFO: Evaluating subset: Design
+2026-01-08 04:10:50 - evalscope - INFO: Getting predictions for subset: Design
+2026-01-08 04:10:50 - evalscope - INFO: Processing 60 samples, if data is large, it may take a while.
+2026-01-08 04:11:51 - evalscope - INFO: Finished getting predictions for subset: Design.
+2026-01-08 04:11:51 - evalscope - INFO: Getting reviews for subset: Design
+2026-01-08 04:11:51 - evalscope - INFO: Reviewing 60 samples, if data is large, it may take a while.
+2026-01-08 04:11:53 - evalscope - INFO: Finished reviewing subset: Design. Total reviewed: 60
+2026-01-08 04:11:53 - evalscope - INFO: Aggregating scores for subset: Design
+2026-01-08 04:11:53 - evalscope - INFO: Evaluating subset: Diagnostics_and_Laboratory_Medicine
+2026-01-08 04:11:53 - evalscope - INFO: Getting predictions for subset: Diagnostics_and_Laboratory_Medicine
+2026-01-08 04:11:53 - evalscope - INFO: Processing 60 samples, if data is large, it may take a while.
+2026-01-08 04:13:25 - evalscope - INFO: Finished getting predictions for subset: Diagnostics_and_Laboratory_Medicine.
+2026-01-08 04:13:25 - evalscope - INFO: Getting reviews for subset: Diagnostics_and_Laboratory_Medicine
+2026-01-08 04:13:25 - evalscope - INFO: Reviewing 60 samples, if data is large, it may take a while.
+2026-01-08 04:13:27 - evalscope - INFO: Finished reviewing subset: Diagnostics_and_Laboratory_Medicine. Total reviewed: 60
+2026-01-08 04:13:27 - evalscope - INFO: Aggregating scores for subset: Diagnostics_and_Laboratory_Medicine
+2026-01-08 04:13:27 - evalscope - INFO: Evaluating subset: Economics
+2026-01-08 04:13:27 - evalscope - INFO: Getting predictions for subset: Economics
+2026-01-08 04:13:27 - evalscope - INFO: Processing 59 samples, if data is large, it may take a while.
+2026-01-08 04:15:05 - evalscope - INFO: Finished getting predictions for subset: Economics.
+2026-01-08 04:15:05 - evalscope - INFO: Getting reviews for subset: Economics
+2026-01-08 04:15:05 - evalscope - INFO: Reviewing 59 samples, if data is large, it may take a while.
+2026-01-08 04:15:05 - evalscope - INFO: Finished reviewing subset: Economics. Total reviewed: 59
+2026-01-08 04:15:05 - evalscope - INFO: Aggregating scores for subset: Economics
+2026-01-08 04:15:05 - evalscope - INFO: Evaluating subset: Electronics
+2026-01-08 04:15:05 - evalscope - INFO: Getting predictions for subset: Electronics
+2026-01-08 04:15:05 - evalscope - INFO: Processing 60 samples, if data is large, it may take a while.
+2026-01-08 04:21:27 - evalscope - INFO: Finished getting predictions for subset: Electronics.
+2026-01-08 04:21:27 - evalscope - INFO: Getting reviews for subset: Electronics
+2026-01-08 04:21:27 - evalscope - INFO: Reviewing 60 samples, if data is large, it may take a while.
+2026-01-08 04:21:28 - evalscope - INFO: Finished reviewing subset: Electronics. Total reviewed: 60
+2026-01-08 04:21:28 - evalscope - INFO: Aggregating scores for subset: Electronics
+2026-01-08 04:21:28 - evalscope - INFO: Evaluating subset: Energy_and_Power
+2026-01-08 04:21:28 - evalscope - INFO: Getting predictions for subset: Energy_and_Power
+2026-01-08 04:21:28 - evalscope - INFO: Processing 58 samples, if data is large, it may take a while.
+2026-01-08 04:27:04 - evalscope - INFO: Finished getting predictions for subset: Energy_and_Power.
+2026-01-08 04:27:04 - evalscope - INFO: Getting reviews for subset: Energy_and_Power
+2026-01-08 04:27:04 - evalscope - INFO: Reviewing 58 samples, if data is large, it may take a while.
+2026-01-08 04:27:05 - evalscope - INFO: Finished reviewing subset: Energy_and_Power. Total reviewed: 58
+2026-01-08 04:27:05 - evalscope - INFO: Aggregating scores for subset: Energy_and_Power
+2026-01-08 04:27:05 - evalscope - INFO: Evaluating subset: Finance
+2026-01-08 04:27:05 - evalscope - INFO: Getting predictions for subset: Finance
+2026-01-08 04:27:05 - evalscope - INFO: Processing 60 samples, if data is large, it may take a while.
+2026-01-08 04:30:17 - evalscope - INFO: Finished getting predictions for subset: Finance.
+2026-01-08 04:30:17 - evalscope - INFO: Getting reviews for subset: Finance
+2026-01-08 04:30:17 - evalscope - INFO: Reviewing 60 samples, if data is large, it may take a while.
+2026-01-08 04:30:18 - evalscope - INFO: Finished reviewing subset: Finance. Total reviewed: 60
+2026-01-08 04:30:18 - evalscope - INFO: Aggregating scores for subset: Finance
+2026-01-08 04:30:18 - evalscope - INFO: Evaluating subset: Geography
+2026-01-08 04:30:18 - evalscope - INFO: Getting predictions for subset: Geography
+2026-01-08 04:30:18 - evalscope - INFO: Processing 52 samples, if data is large, it may take a while.
+2026-01-08 04:32:29 - evalscope - INFO: Finished getting predictions for subset: Geography.
+2026-01-08 04:32:29 - evalscope - INFO: Getting reviews for subset: Geography
+2026-01-08 04:32:29 - evalscope - INFO: Reviewing 52 samples, if data is large, it may take a while.
+2026-01-08 04:32:30 - evalscope - INFO: Finished reviewing subset: Geography. Total reviewed: 52
+2026-01-08 04:32:30 - evalscope - INFO: Aggregating scores for subset: Geography
+2026-01-08 04:32:30 - evalscope - INFO: Evaluating subset: History
+2026-01-08 04:32:30 - evalscope - INFO: Getting predictions for subset: History
+2026-01-08 04:32:30 - evalscope - INFO: Processing 56 samples, if data is large, it may take a while.
+2026-01-08 04:33:18 - evalscope - INFO: Finished getting predictions for subset: History.
+2026-01-08 04:33:18 - evalscope - INFO: Getting reviews for subset: History
+2026-01-08 04:33:18 - evalscope - INFO: Reviewing 56 samples, if data is large, it may take a while.
+2026-01-08 04:33:19 - evalscope - INFO: Finished reviewing subset: History. Total reviewed: 56
+2026-01-08 04:33:19 - evalscope - INFO: Aggregating scores for subset: History
+2026-01-08 04:33:19 - evalscope - INFO: Evaluating subset: Literature
+2026-01-08 04:33:19 - evalscope - INFO: Getting predictions for subset: Literature
+2026-01-08 04:33:19 - evalscope - INFO: Processing 52 samples, if data is large, it may take a while.
+2026-01-08 04:34:14 - evalscope - INFO: Finished getting predictions for subset: Literature.
+2026-01-08 04:34:14 - evalscope - INFO: Getting reviews for subset: Literature
+2026-01-08 04:34:14 - evalscope - INFO: Reviewing 52 samples, if data is large, it may take a while.
+2026-01-08 04:34:15 - evalscope - INFO: Finished reviewing subset: Literature. Total reviewed: 52
+2026-01-08 04:34:15 - evalscope - INFO: Aggregating scores for subset: Literature
+2026-01-08 04:34:15 - evalscope - INFO: Evaluating subset: Manage
+2026-01-08 04:34:15 - evalscope - INFO: Getting predictions for subset: Manage
+2026-01-08 04:34:15 - evalscope - INFO: Processing 50 samples, if data is large, it may take a while.
+2026-01-08 04:35:30 - evalscope - INFO: Finished getting predictions for subset: Manage.
+2026-01-08 04:35:30 - evalscope - INFO: Getting reviews for subset: Manage
+2026-01-08 04:35:30 - evalscope - INFO: Reviewing 50 samples, if data is large, it may take a while.
+2026-01-08 04:35:31 - evalscope - INFO: Finished reviewing subset: Manage. Total reviewed: 50
+2026-01-08 04:35:31 - evalscope - INFO: Aggregating scores for subset: Manage
+2026-01-08 04:35:31 - evalscope - INFO: Evaluating subset: Marketing
+2026-01-08 04:35:31 - evalscope - INFO: Getting predictions for subset: Marketing
+2026-01-08 04:35:31 - evalscope - INFO: Processing 59 samples, if data is large, it may take a while.
+2026-01-08 04:37:12 - evalscope - INFO: Finished getting predictions for subset: Marketing.
+2026-01-08 04:37:12 - evalscope - INFO: Getting reviews for subset: Marketing
+2026-01-08 04:37:12 - evalscope - INFO: Reviewing 59 samples, if data is large, it may take a while.
+2026-01-08 04:37:13 - evalscope - INFO: Finished reviewing subset: Marketing. Total reviewed: 59
+2026-01-08 04:37:13 - evalscope - INFO: Aggregating scores for subset: Marketing
+2026-01-08 04:37:13 - evalscope - INFO: Evaluating subset: Materials
+2026-01-08 04:37:13 - evalscope - INFO: Getting predictions for subset: Materials
+2026-01-08 04:37:13 - evalscope - INFO: Processing 60 samples, if data is large, it may take a while.
+2026-01-08 04:42:24 - evalscope - INFO: Finished getting predictions for subset: Materials.
+2026-01-08 04:42:24 - evalscope - INFO: Getting reviews for subset: Materials
+2026-01-08 04:42:24 - evalscope - INFO: Reviewing 60 samples, if data is large, it may take a while.
+2026-01-08 04:42:25 - evalscope - INFO: Finished reviewing subset: Materials. Total reviewed: 60
+2026-01-08 04:42:25 - evalscope - INFO: Aggregating scores for subset: Materials
+2026-01-08 04:42:25 - evalscope - INFO: Evaluating subset: Math
+2026-01-08 04:42:25 - evalscope - INFO: Getting predictions for subset: Math
+2026-01-08 04:42:25 - evalscope - INFO: Processing 60 samples, if data is large, it may take a while.
+2026-01-08 04:46:06 - evalscope - INFO: Finished getting predictions for subset: Math.
+2026-01-08 04:46:06 - evalscope - INFO: Getting reviews for subset: Math
+2026-01-08 04:46:06 - evalscope - INFO: Reviewing 60 samples, if data is large, it may take a while.
+2026-01-08 04:46:06 - evalscope - INFO: Finished reviewing subset: Math. Total reviewed: 60
+2026-01-08 04:46:06 - evalscope - INFO: Aggregating scores for subset: Math
+2026-01-08 04:46:06 - evalscope - INFO: Evaluating subset: Mechanical_Engineering
+2026-01-08 04:46:06 - evalscope - INFO: Getting predictions for subset: Mechanical_Engineering
+2026-01-08 04:46:06 - evalscope - INFO: Processing 59 samples, if data is large, it may take a while.
+2026-01-08 04:50:44 - evalscope - INFO: Finished getting predictions for subset: Mechanical_Engineering.
+2026-01-08 04:50:44 - evalscope - INFO: Getting reviews for subset: Mechanical_Engineering
+2026-01-08 04:50:44 - evalscope - INFO: Reviewing 59 samples, if data is large, it may take a while.
+2026-01-08 04:50:45 - evalscope - INFO: Finished reviewing subset: Mechanical_Engineering. Total reviewed: 59
+2026-01-08 04:50:45 - evalscope - INFO: Aggregating scores for subset: Mechanical_Engineering
+2026-01-08 04:50:45 - evalscope - INFO: Evaluating subset: Music
+2026-01-08 04:50:45 - evalscope - INFO: Getting predictions for subset: Music
+2026-01-08 04:50:45 - evalscope - INFO: Processing 60 samples, if data is large, it may take a while.
+2026-01-08 04:54:51 - evalscope - INFO: Finished getting predictions for subset: Music.
+2026-01-08 04:54:51 - evalscope - INFO: Getting reviews for subset: Music
+2026-01-08 04:54:51 - evalscope - INFO: Reviewing 60 samples, if data is large, it may take a while.
+2026-01-08 04:54:53 - evalscope - INFO: Finished reviewing subset: Music. Total reviewed: 60
+2026-01-08 04:54:53 - evalscope - INFO: Aggregating scores for subset: Music
+2026-01-08 04:54:53 - evalscope - INFO: Evaluating subset: Pharmacy
+2026-01-08 04:54:53 - evalscope - INFO: Getting predictions for subset: Pharmacy
+2026-01-08 04:54:53 - evalscope - INFO: Processing 57 samples, if data is large, it may take a while.
+2026-01-08 04:56:31 - evalscope - INFO: Finished getting predictions for subset: Pharmacy.
+2026-01-08 04:56:31 - evalscope - INFO: Getting reviews for subset: Pharmacy
+2026-01-08 04:56:31 - evalscope - INFO: Reviewing 57 samples, if data is large, it may take a while.
+2026-01-08 04:56:32 - evalscope - INFO: Finished reviewing subset: Pharmacy. Total reviewed: 57
+2026-01-08 04:56:32 - evalscope - INFO: Aggregating scores for subset: Pharmacy
+2026-01-08 04:56:32 - evalscope - INFO: Evaluating subset: Physics
+2026-01-08 04:56:32 - evalscope - INFO: Getting predictions for subset: Physics
+2026-01-08 04:56:32 - evalscope - INFO: Processing 60 samples, if data is large, it may take a while.
+2026-01-08 04:58:23 - evalscope - INFO: Finished getting predictions for subset: Physics.
+2026-01-08 04:58:23 - evalscope - INFO: Getting reviews for subset: Physics
+2026-01-08 04:58:23 - evalscope - INFO: Reviewing 60 samples, if data is large, it may take a while.
+2026-01-08 04:58:24 - evalscope - INFO: Finished reviewing subset: Physics. Total reviewed: 60
+2026-01-08 04:58:24 - evalscope - INFO: Aggregating scores for subset: Physics
+2026-01-08 04:58:24 - evalscope - INFO: Evaluating subset: Psychology
+2026-01-08 04:58:24 - evalscope - INFO: Getting predictions for subset: Psychology
+2026-01-08 04:58:24 - evalscope - INFO: Processing 60 samples, if data is large, it may take a while.
+2026-01-08 04:59:14 - evalscope - INFO: Finished getting predictions for subset: Psychology.
+2026-01-08 04:59:14 - evalscope - INFO: Getting reviews for subset: Psychology
+2026-01-08 04:59:14 - evalscope - INFO: Reviewing 60 samples, if data is large, it may take a while.
+2026-01-08 04:59:14 - evalscope - INFO: Finished reviewing subset: Psychology. Total reviewed: 60
+2026-01-08 04:59:14 - evalscope - INFO: Aggregating scores for subset: Psychology
+2026-01-08 04:59:14 - evalscope - INFO: Evaluating subset: Public_Health
+2026-01-08 04:59:14 - evalscope - INFO: Getting predictions for subset: Public_Health
+2026-01-08 04:59:14 - evalscope - INFO: Processing 58 samples, if data is large, it may take a while.
+2026-01-08 05:00:54 - evalscope - INFO: Finished getting predictions for subset: Public_Health.
+2026-01-08 05:00:54 - evalscope - INFO: Getting reviews for subset: Public_Health
+2026-01-08 05:00:54 - evalscope - INFO: Reviewing 58 samples, if data is large, it may take a while.
+2026-01-08 05:00:55 - evalscope - INFO: Finished reviewing subset: Public_Health. Total reviewed: 58
+2026-01-08 05:00:55 - evalscope - INFO: Aggregating scores for subset: Public_Health
+2026-01-08 05:00:55 - evalscope - INFO: Evaluating subset: Sociology
+2026-01-08 05:00:55 - evalscope - INFO: Getting predictions for subset: Sociology
+2026-01-08 05:00:55 - evalscope - INFO: Processing 54 samples, if data is large, it may take a while.
+2026-01-08 05:01:17 - evalscope - INFO: Finished getting predictions for subset: Sociology.
+2026-01-08 05:01:17 - evalscope - INFO: Getting reviews for subset: Sociology
+2026-01-08 05:01:17 - evalscope - INFO: Reviewing 54 samples, if data is large, it may take a while.
+2026-01-08 05:01:18 - evalscope - INFO: Finished reviewing subset: Sociology. Total reviewed: 54
+2026-01-08 05:01:18 - evalscope - INFO: Aggregating scores for subset: Sociology
+2026-01-08 05:01:18 - evalscope - INFO: Generating report...
+2026-01-08 05:01:18 - evalscope - INFO: 
+mmmu_pro report table:
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| Model            | Dataset   | Metric   | Subset                              |   Num |   Score | Cat.0   |
++==================+===========+==========+=====================================+=======+=========+=========+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Accounting                          |    58 |  0.7069 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Agriculture                         |    60 |  0.5    | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Architecture_and_Engineering        |    60 |  0.3333 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Art                                 |    53 |  0.6415 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Art_Theory                          |    55 |  0.7636 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Basic_Medical_Science               |    52 |  0.5385 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Biology                             |    59 |  0.4407 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Chemistry                           |    60 |  0.5333 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Clinical_Medicine                   |    59 |  0.5424 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Computer_Science                    |    60 |  0.6167 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Design                              |    60 |  0.7833 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Diagnostics_and_Laboratory_Medicine |    60 |  0.3667 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Economics                           |    59 |  0.7797 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Electronics                         |    60 |  0.35   | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Energy_and_Power                    |    58 |  0.4655 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Finance                             |    60 |  0.75   | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Geography                           |    52 |  0.4808 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | History                             |    56 |  0.625  | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Literature                          |    52 |  0.9038 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Manage                              |    50 |  0.7    | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Marketing                           |    59 |  0.8475 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Materials                           |    60 |  0.4    | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Math                                |    60 |  0.5833 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Mechanical_Engineering              |    59 |  0.3898 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Music                               |    60 |  0.25   | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Pharmacy                            |    57 |  0.6842 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Physics                             |    60 |  0.6667 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Psychology                          |    60 |  0.7167 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Public_Health                       |    58 |  0.7759 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Sociology                           |    54 |  0.6481 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | OVERALL                             |  1730 |  0.5902 | -       |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+ 
+
+2026-01-08 05:01:18 - evalscope - INFO: Generating report analysis, please wait ...
+2026-01-08 05:01:18 - evalscope - INFO: Creating model Qwen/Qwen3-235B-A22B with eval_type=openai_api base_url=https://api-inference.modelscope.cn/v1/, config={'max_tokens': 1024, 'temperature': 0.0}, model_args={}
+2026-01-08 05:01:18 - evalscope - ERROR: Error generating analysis: 'LLMJudge' object is not callable
+2026-01-08 05:01:18 - evalscope - INFO: Report analysis:
+N/A
+2026-01-08 05:01:18 - evalscope - INFO: Dump report to: /workspace/recipe/model_evaluation_result/20260108_034751/reports/qwen3_vl_8b_orig/mmmu_pro.json 
+
+2026-01-08 05:01:18 - evalscope - INFO: Benchmark mmmu_pro evaluation finished.
+2026-01-08 05:01:18 - evalscope - INFO: Overall report table: 
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| Model            | Dataset   | Metric   | Subset                              |   Num |   Score | Cat.0   |
++==================+===========+==========+=====================================+=======+=========+=========+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Accounting                          |    58 |  0.7069 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Agriculture                         |    60 |  0.5    | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Architecture_and_Engineering        |    60 |  0.3333 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Art                                 |    53 |  0.6415 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Art_Theory                          |    55 |  0.7636 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Basic_Medical_Science               |    52 |  0.5385 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Biology                             |    59 |  0.4407 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Chemistry                           |    60 |  0.5333 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Clinical_Medicine                   |    59 |  0.5424 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Computer_Science                    |    60 |  0.6167 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Design                              |    60 |  0.7833 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Diagnostics_and_Laboratory_Medicine |    60 |  0.3667 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Economics                           |    59 |  0.7797 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Electronics                         |    60 |  0.35   | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Energy_and_Power                    |    58 |  0.4655 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Finance                             |    60 |  0.75   | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Geography                           |    52 |  0.4808 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | History                             |    56 |  0.625  | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Literature                          |    52 |  0.9038 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Manage                              |    50 |  0.7    | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Marketing                           |    59 |  0.8475 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Materials                           |    60 |  0.4    | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Math                                |    60 |  0.5833 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Mechanical_Engineering              |    59 |  0.3898 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Music                               |    60 |  0.25   | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Pharmacy                            |    57 |  0.6842 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Physics                             |    60 |  0.6667 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Psychology                          |    60 |  0.7167 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Public_Health                       |    58 |  0.7759 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | Sociology                           |    54 |  0.6481 | default |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+
+| qwen3_vl_8b_orig | mmmu_pro  | mean_acc | OVERALL                             |  1730 |  0.5902 | -       |
++------------------+-----------+----------+-------------------------------------+-------+---------+---------+ 
+
+2026-01-08 05:01:18 - evalscope - INFO: Finished evaluation for qwen3_vl_8b_orig on ['mmmu_pro']
+2026-01-08 05:01:18 - evalscope - INFO: Output directory: /workspace/recipe/model_evaluation_result/20260108_034751

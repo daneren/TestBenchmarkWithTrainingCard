@@ -221,6 +221,9 @@ datatsets/qwen-datasets
 datatsets/wds
 recipe/checkpoints/
 recipe/exp/
-recipe/model_evaluation_result/
+# recipe/model_evaluation_result/
+*.jsonl
+
+!eval_log.log
 
 test.sh

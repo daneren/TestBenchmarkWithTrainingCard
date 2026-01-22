@@ -1,0 +1,179 @@
+{
+    "name": "qwen3_vl_8b_orig@mmmu_pro",
+    "dataset_name": "mmmu_pro",
+    "dataset_pretty_name": "MMMU-PRO",
+    "dataset_description": "MMMU-Pro is an enhanced multimodal benchmark designed to rigorously assess the true understanding capabilities of advanced AI models across multiple modalities. It builds upon the original MMMU benchmark by introducing several key improvements that make it more challenging and realistic, ensuring that models are evaluated on their genuine ability to integrate and comprehend both visual and textual information.",
+    "model_name": "qwen3_vl_8b_orig",
+    "score": 0.5902,
+    "metrics": [
+        {
+            "name": "mean_acc",
+            "num": 1730,
+            "score": 0.5902,
+            "macro_score": 0.5902,
+            "categories": [
+                {
+                    "name": [
+                        "default"
+                    ],
+                    "num": 1730,
+                    "score": 0.5902,
+                    "macro_score": 0.5928,
+                    "subsets": [
+                        {
+                            "name": "Accounting",
+                            "score": 0.7069,
+                            "num": 58
+                        },
+                        {
+                            "name": "Agriculture",
+                            "score": 0.5,
+                            "num": 60
+                        },
+                        {
+                            "name": "Architecture_and_Engineering",
+                            "score": 0.3333,
+                            "num": 60
+                        },
+                        {
+                            "name": "Art",
+                            "score": 0.6415,
+                            "num": 53
+                        },
+                        {
+                            "name": "Art_Theory",
+                            "score": 0.7636,
+                            "num": 55
+                        },
+                        {
+                            "name": "Basic_Medical_Science",
+                            "score": 0.5385,
+                            "num": 52
+                        },
+                        {
+                            "name": "Biology",
+                            "score": 0.4407,
+                            "num": 59
+                        },
+                        {
+                            "name": "Chemistry",
+                            "score": 0.5333,
+                            "num": 60
+                        },
+                        {
+                            "name": "Clinical_Medicine",
+                            "score": 0.5424,
+                            "num": 59
+                        },
+                        {
+                            "name": "Computer_Science",
+                            "score": 0.6167,
+                            "num": 60
+                        },
+                        {
+                            "name": "Design",
+                            "score": 0.7833,
+                            "num": 60
+                        },
+                        {
+                            "name": "Diagnostics_and_Laboratory_Medicine",
+                            "score": 0.3667,
+                            "num": 60
+                        },
+                        {
+                            "name": "Economics",
+                            "score": 0.7797,
+                            "num": 59
+                        },
+                        {
+                            "name": "Electronics",
+                            "score": 0.35,
+                            "num": 60
+                        },
+                        {
+                            "name": "Energy_and_Power",
+                            "score": 0.4655,
+                            "num": 58
+                        },
+                        {
+                            "name": "Finance",
+                            "score": 0.75,
+                            "num": 60
+                        },
+                        {
+                            "name": "Geography",
+                            "score": 0.4808,
+                            "num": 52
+                        },
+                        {
+                            "name": "History",
+                            "score": 0.625,
+                            "num": 56
+                        },
+                        {
+                            "name": "Literature",
+                            "score": 0.9038,
+                            "num": 52
+                        },
+                        {
+                            "name": "Manage",
+                            "score": 0.7,
+                            "num": 50
+                        },
+                        {
+                            "name": "Marketing",
+                            "score": 0.8475,
+                            "num": 59
+                        },
+                        {
+                            "name": "Materials",
+                            "score": 0.4,
+                            "num": 60
+                        },
+                        {
+                            "name": "Math",
+                            "score": 0.5833,
+                            "num": 60
+                        },
+                        {
+                            "name": "Mechanical_Engineering",
+                            "score": 0.3898,
+                            "num": 59
+                        },
+                        {
+                            "name": "Music",
+                            "score": 0.25,
+                            "num": 60
+                        },
+                        {
+                            "name": "Pharmacy",
+                            "score": 0.6842,
+                            "num": 57
+                        },
+                        {
+                            "name": "Physics",
+                            "score": 0.6667,
+                            "num": 60
+                        },
+                        {
+                            "name": "Psychology",
+                            "score": 0.7167,
+                            "num": 60
+                        },
+                        {
+                            "name": "Public_Health",
+                            "score": 0.7759,
+                            "num": 58
+                        },
+                        {
+                            "name": "Sociology",
+                            "score": 0.6481,
+                            "num": 54
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "analysis": "N/A"
+}
