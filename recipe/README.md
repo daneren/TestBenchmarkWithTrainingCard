@@ -400,7 +400,7 @@ docker exec -it danerli_benchmark bash
 
 ```bash
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
-export WORLD_SIZE=1
+export NNODES=1
 export NODE_RANK=0
 export MASTER_ADDR=127.0.0.1
 export MASTER_PORT=23567
@@ -408,6 +408,7 @@ export GPUS_PER_NODE=8
 export PRETRAIN_CHECKPOINT_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct-to-mcore
 
 bash /workspace/recipe/run_qwen3vl_30B_A3B_pt.sh 2>&1 | tee /workspace/recipe/Qwen3-VL-30B-A3B-Instruct_single_node.log
+
 ```
 
 #### 多机训练
