@@ -450,6 +450,68 @@ bash /workspace/recipe/run_qwen3vl_30B_A3B_pt_mutil_node_rank_1.sh 2>&1 | tee /w
 - **多机运行日志（Rank 0）：** [Qwen3-VL-30B-A3B-Instruct_mutil_node_rank_0.log](./Qwen3-VL-30B-A3B-Instruct_mutil_node_rank_0.log)
 - **多机运行日志（Rank 1）：** [Qwen3-VL-30B-A3B-Instruct_mutil_node_rank_1.log](./Qwen3-VL-30B-A3B-Instruct_mutil_node_rank_1.log)
 
+
+### Qwen3-VL-30B-A3B-Instruct 训练 （64G显存训练方案）
+
+对 Qwen3-VL-30B-A3B-Instruct 模型进行训练。（针对于海光训练卡只有64G的显存情况，修改模型的大小进行测试）
+
+#### 环境准备
+
+```bash
+docker exec -it danerli_benchmark bash
+```
+
+#### 单机训练
+
+```bash
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+export WORLD_SIZE=1
+export NODE_RANK=0
+export MASTER_ADDR=127.0.0.1
+export MASTER_PORT=23567
+export GPUS_PER_NODE=8
+export PRETRAIN_CHECKPOINT_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct
+
+bash /workspace/recipe/run_qwen3vl_30B_A3B_pt_random.sh 2>&1 | tee /workspace/recipe/Qwen3-VL-30B-A3B-Instruct_random_single_node.log
+```
+
+#### 多机训练
+
+**Rank 0 节点：**
+```bash
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+export NNODES=2
+export NODE_RANK=0
+export MASTER_ADDR=${MASTER_ADDR:-"请设置 MASTER_ADDR 环境变量"}  # 主节点 IP（必需） 
+export MASTER_PORT=23567                        # 通信端口                      
+export GPUS_PER_NODE=8 
+export PRETRAIN_CHECKPOINT_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct
+export GBS=2
+bash /workspace/recipe/run_qwen3vl_30B_A3B_pt_random.sh 2>&1 | tee /workspace/recipe/Qwen3-VL-30B-A3B-Instruct_random_mutil_node_rank_0.log
+```
+
+**Rank 1 节点：**
+```bash
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+export NNODES=2
+export NODE_RANK=1
+export MASTER_ADDR=${MASTER_ADDR:-"请设置 MASTER_ADDR 环境变量"}  # 主节点 IP（必需） 
+export MASTER_PORT=23567                    # 通信端口  
+export GPUS_PER_NODE=8 
+export PRETRAIN_CHECKPOINT_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct
+export GBS=2
+bash /workspace/recipe/run_qwen3vl_30B_A3B_pt_random.sh 2>&1 | tee /workspace/recipe/Qwen3-VL-30B-A3B-Instruct_random_mutil_node_rank_1.log
+```
+
+
+**注意：** 多机训练脚本中已包含必要的环境变量配置，只需设置 `PRETRAIN_CHECKPOINT_PATH` 即可。
+
+#### 训练日志
+
+- **单机运行日志：** [Qwen3-VL-30B-A3B-Instruct_random_single_node.log](./Qwen3-VL-30B-A3B-Instruct_random_single_node.log)
+- **多机运行日志（Rank 0）：** [Qwen3-VL-30B-A3B-Instruct_random_mutil_node_rank_0.log](./Qwen3-VL-30B-A3B-Instruct_random_mutil_node_rank_0.log)
+- **多机运行日志（Rank 1）：** [Qwen3-VL-30B-A3B-Instruct_random_mutil_node_rank_1.log](./Qwen3-VL-30B-A3B-Instruct_random_mutil_node_rank_1.log)
+
 ---
 
 ## ❓ 常见问题
