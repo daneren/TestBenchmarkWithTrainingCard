@@ -184,7 +184,7 @@ python build_fake_wds_for_vl.py --output-dir /workspace/datatsets/wds
 - LLM 数据：用于语言模型预训练
 - MLM 数据：用于视觉-语言多模态模型训练
 - 数据下载完成后会保存在 `/workspace/datatsets/` 目录下
-- 强化学习的数据已经通过git clone下载到了[/workspace/datatsets/geo3k](../datatsets/geo3k/)
+- 强化学习的数据已经通过git clone下载到了[../datatsets/geo3k](../datatsets/geo3k/)
 
 ## 模型准备
 
@@ -301,7 +301,7 @@ pip install evalscope==1.2.0
 
 **评测 RL 训练后的模型：**
 
-这三个模型都是大约评测一个小时左右，评测时间过长有可能是模型训练之后模型在评测阶段一致重复输出
+这三个模型都是大约评测一个小时左右，评测时间过长有可能是模型训练之后模型在评测阶段重复输出，建议检查评测阶段调用模型的repsonse
 
 ```bash
 # 评测多机训练后的step120保存的模型
@@ -400,7 +400,7 @@ docker exec -it danerli_benchmark bash
 
 ```bash
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
-export WORLD_SIZE=1
+export NNODES=1
 export NODE_RANK=0
 export MASTER_ADDR=127.0.0.1
 export MASTER_PORT=23567
@@ -408,6 +408,7 @@ export GPUS_PER_NODE=8
 export PRETRAIN_CHECKPOINT_PATH=/mnt/cfs/tilearn/pretrain_models/Qwen/Qwen3-VL-30B-A3B-Instruct-to-mcore
 
 bash /workspace/recipe/run_qwen3vl_30B_A3B_pt.sh 2>&1 | tee /workspace/recipe/Qwen3-VL-30B-A3B-Instruct_single_node.log
+
 ```
 
 #### 多机训练
